@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Local Knowledge RAG</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <div>
+          <h1>Local Knowledge RAG</h1>
+          <p>EC2内のMarkdown/テキストを検索し、OpenAIで回答します。</p>
+        </div>
+        <button id="ingestButton" type="button">ナレッジ取り込み</button>
+      </header>
+
+      <section id="messages" class="messages" aria-live="polite">
+        <article class="message assistant">
+          <div class="bubble">
+            ナレッジを `knowledge` フォルダに配置し、「ナレッジ取り込み」を実行してから質問してください。
+          </div>
+        </article>
+      </section>
+
+      <form id="chatForm" class="chat-form">
+        <textarea
+          id="question"
+          name="question"
+          rows="3"
+          placeholder="質問を入力してください"
+          required
+        ></textarea>
+        <button type="submit">送信</button>
+      </form>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Chroma persistent database on EC2 EBS
+chroma_db/
+
+# Local runtime files
+*.log
