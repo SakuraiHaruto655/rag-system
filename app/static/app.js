@@ -339,7 +339,6 @@ async function submitQuestion(question) {
     const { article, bubble } = createMessageElement("assistant");
     const fullHtml = renderMarkdown(data.answer || "");
     await typeOut(bubble, data.answer || "", fullHtml);
-    attachSources(bubble, data.sources);
     attachCopyButton(article, () => data.answer || "");
   } catch (error) {
     thinkingArticle.remove();
