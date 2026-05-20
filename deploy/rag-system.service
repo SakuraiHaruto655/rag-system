@@ -1,0 +1,17 @@
+[Unit]
+Description=Local Knowledge RAG (FastAPI / uvicorn)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/home/ec2-user/rag-system
+EnvironmentFile=/home/ec2-user/rag-system/.env
+ExecStart=/home/ec2-user/rag-system/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
