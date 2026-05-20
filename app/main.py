@@ -2,7 +2,6 @@ from functools import lru_cache
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.config import get_settings
@@ -14,17 +13,11 @@ BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
 
 app = FastAPI(title="Local Knowledge RAG", version="1.0.0")
-app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
 @lru_cache
 def get_rag_service() -> RagService:
     return RagService(get_settings())
-
-
-@app.get("/")
-def index() -> FileResponse:
-    return FileResponse(STATIC_DIR / "index.html")
 
 
 @app.get("/api/health")
@@ -63,3 +56,6 @@ def chat(request: ChatRequest) -> ChatResponse:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
     return ChatResponse(answer=answer, sources=sources)
+
+
+app.mount("/", StaticFiles(directory=str(STATIC_DIR), html=True), name="static")
